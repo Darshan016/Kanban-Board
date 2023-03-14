@@ -1,0 +1,68 @@
+<div style="padding: 40px;height: fit-content;" >
+    <div style="text-align: center;font-size: 19px;font-weight: 500;">
+        Let's Update!
+    </div>
+    <form [formGroup]="updatedTaskForm" >
+        <!-- <div>
+            <label>Task Name</label>
+            <input type="text" class="form-control" formControlName="taskName" >
+        </div> -->
+
+      
+        <div>
+            <label>Work Space Name</label>
+            <input type="text" class="form-control" formControlName="spaceName" readonly>
+        </div>
+<!-- 
+        <div style="display: flex; margin-top: 5px;">
+            <div >
+                <label style="font-size: 12px; margin-top: 17px">Task Status</label>
+                <div style="margin-top: -5px;">
+                    <mat-form-field style="width: 150px;">
+                        <mat-select formControlName="statusName" [(value)]="updatedTaskForm.statusName">
+                            <mat-option *ngFor="let status of allStatus" [value]="status.statusName" >{{status.statusName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+    
+            <div style="margin-left: 20px;">
+                <label style="font-size: 12p; margin-top: 17px">Priority Level</label>
+                <div style="margin-top: -5px;">
+                    <mat-form-field  style="width: 150px;">
+                        <mat-select formControlName="priority" [(value)]="updatedTaskForm.priority">
+                            <mat-option>None</mat-option>
+                            <mat-option value="High">High</mat-option>
+                            <mat-option value="Medium">Medium</mat-option>
+                            <mat-option value="Low">Low</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div> -->
+
+    
+        <div style="margin-top: 8px;">
+            <label>Task Description</label>
+            <input type="text" class="form-control" formControlName="taskDescription" >
+        </div>
+
+     
+        <br>
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [min]="currentDate" >
+              <input matStartDate placeholder="Start date" class="form-control" formControlName="startDate">
+              <input matEndDate placeholder="End date" class="form-control" formControlName="endDate" >
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field> -->
+        
+       
+          <input id="idHere" type="color">
+          <!-- <button onclick="alert(document.getElementById('idHere').value)">color value</button -->
+        <button mat-raised-button color="primary" type="submit" (click)="updateTask(updatedTaskForm.value)">Update</button>
+    </form>
+</div>

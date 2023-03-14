@@ -1,0 +1,220 @@
+<p  style="margin-top: 56px;">
+    <!-- <mat-toolbar color="primary"> -->
+      <button  mat-icon-button   class="example-icon right" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()">
+        <mat-icon >chevron_right</mat-icon>
+      </button>
+  </p>
+
+  <mat-sidenav-container class="sidenav-container" style="height: 100vh;">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+    mode="side" opened="true"
+          style="width: 250px;" >
+        <mat-nav-list>
+
+            <div style="display: flex;justify-content: space-around; align-content: center;align-items: center;">
+    <div style="background-color: rgb(250, 154, 0);color: white;padding: 6px;width: 20px;height: 20px;align-content: center;text-align: center;">
+      <h6 style="color: white;">T</h6>
+    </div>
+    <span>
+        <p style="margin-top: 24px; margin-right: 50px;">hi {{userName}}</p>
+    </span>
+
+    <button  mat-icon-button   class="example-icon left" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()">
+        <mat-icon >chevron_left</mat-icon>
+      </button>
+</div>
+<hr>
+
+
+
+            <span *ngIf="n==0" style="display: flex;justify-content: space-between;margin: 12px;"><h5>Edit Board</h5><mat-icon >edit</mat-icon></span>
+            <span  style="display: flex;justify-content: space-between;margin: 12px;"><h5>Members</h5><mat-icon *ngIf="n==0" (click)="addMembers()">add</mat-icon></span>
+
+      <hr>
+            <span *ngFor="let m of members"><span style="display: flex;justify-content: space-between;margin: 12px;"><h6>{{m}}</h6><mat-icon *ngIf="n==0" (click)="deleteMember(m)">delete</mat-icon></span></span>
+
+            <hr>
+            <hr>
+            <span  style="display: flex;justify-content: space-between;margin: 12px;"><h5>log out</h5><mat-icon >logout</mat-icon></span>
+
+
+          </mat-nav-list>
+
+
+
+    </mat-sidenav>
+
+    <div style="margin:1%;align-items:flex-end;margin-left: 10px;">
+        <div *ngIf="num==1">
+          <button mat-button (click)="createStatus()" ><h4>+ Status</h4></button>
+        </div>
+        <!-- {{ws|json}} -->
+
+        <div *ngIf="num==2" style="width:max-content; margin-top: -25px;height: min-content;margin-right: 30px; ">
+          <form  [formGroup]="sf">
+            <div class="form-group">
+            <mat-form-field>
+                <input matInput type="text" placeholder="WorkSpace Name" id="statusName"
+                formControlName="statusName" required maxlength="50" >
+            </mat-form-field>
+              <button mat-icon-button color="primary"(click)="saveStatus()"  [disabled]=!sf.valid
+                >
+                <mat-icon>done</mat-icon>
+              </button>
+              <button mat-icon-button color="primary" (click)="cancelMethod()">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+        </div>
+
+
+
+
+    <div  *ngFor="let week of status" style="display: inline-flex;">
+      <div class="drag-container">
+        <div   class="section-heading" style="display: flex;justify-content: space-around;border-radius: 35px;width:250px" ><h3 >{{week.statusName}}</h3><div style="display: flex;justify-content: flex-end;"><mat-icon (click)="addT(week.statusName)" style="margin-left: 23px;">add</mat-icon><mat-icon (click)="renam(week)">edit</mat-icon><mat-icon (click)="delete(week)">delete</mat-icon></div></div>
+        <div cdkDropList id="{{week.statusName}}" [cdkDropListData]="week.task"
+          [cdkDropListConnectedTo]="connectedTo" class="item-list" (cdkDropListDropped)="drop2($event)" style="overflow-y: scroll; height:400px;">
+          <div  *ngFor="let weekItem of week.task" cdkDrag >
+
+            <!-- <div style="padding: 12px; background-image: url({{weekItem.priority}});"  class="bc"><h5 style="color: white;">{{week.statusName}} {{weekItem.taskName}} {{weekItem.taskDescription}} {{weekItem.endDate}}</h5></div>
+          <button (click)="showUpdateTask(week.statusName,weekItem.taskName)"><mat-icon>edit</mat-icon></button>
+          <button (click)="deleteTask(week.statusName,weekItem)"><mat-icon>delete</mat-icon></button>
+
+         -->
+
+
+			<div class="pt-2">
+        <div class="two" style="position: relative;">
+          <!-- <div style="background-image: url({{weekItem.priority}});height: 1px;width: 100%;rotate: "> -->
+
+          <!-- </div> -->
+
+          <div style="position: absolute; display: inline; padding: 12px;right: 12px; top: 12px;">
+            <mat-icon (click)="showUpdateTask(week.statusName,weekItem.taskName)">edit</mat-icon>
+          <mat-icon (click)="deleteTask(week.statusName,weekItem)">delete</mat-icon>
+          </div>
+          <div class="px-3 pt-3">
+            <h3 class="name">{{weekItem.taskName}}</h3>
+            <p class="quote2">{{weekItem.taskDescription}}</p>
+          </div>
+          <div class="d-flex justify-content-start px-3 align-items-center">
+            <i class="mdi mdi-view-comfy task"></i>
+            <span class="quote2 pl-2">Task: {{week.statusName}}</span>
+          </div>
+          <div class="d-flex justify-content-between  px-3 align-items-center pb-3">
+            <div class="d-flex justify-content-start align-items-center">
+            <i class="mdi mdi-calendar-clock date"></i>
+            <span class="quote2 pl-2">Date: {{weekItem.endDate}}</span>
+
+          </div>
+          
+          <div class="d-flex justify-content-end">
+            <img src="https://img.icons8.com/bubbles/50/000000/short-curly-hair-girl-musical-notes.png" width="20" class="img1" />
+            <img src="https://img.icons8.com/bubbles/50/000000/girl-and-playing-card.png" width="20" class="img2" />
+            <img src="https://img.icons8.com/bubbles/50/000000/short-hair-girl-question-mark.png" width="20" class="img3" />
+          </div>
+          </div>
+
+        </div>
+        </div>
+
+
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+    <mat-card style="width: fit-content;" class="example-card" id="show" *ngIf="showTask">
+
+      <mat-card-header>
+          <mat-card-subtitle>Update WorkSapce</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+          <br>
+          <mat-form-field >
+              <label for="title">Space Title</label>
+              <input matInput name="title" id="title"   required [(ngModel)]="task.taskName" >
+              <mat-error >Title is required</mat-error>
+            </mat-form-field>
+          <br>
+          <mat-card-actions>
+              <button mat-button color="warn"  (click)="addTask()">Add</button>
+          </mat-card-actions>
+      </mat-card-content>
+      </mat-card>
+
+
+
+
+
+
+
+
+
+      <mat-card style="width: fit-content;" class="example-card" id="show" *ngIf="updateTask">
+
+        <mat-card-header>
+            <mat-card-subtitle>Update Task</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <br>
+            <mat-form-field >
+                <label for="title">Task Title</label>
+                <input matInput name="title" id="title"  required [(ngModel)]="task.taskName" >
+                <mat-error >Title is required</mat-error>
+              </mat-form-field>
+            <br>
+            <mat-card-actions>
+                <button mat-button color="warn"  (click)="updateTasks()">Add</button>
+            </mat-card-actions>
+        </mat-card-content>
+        </mat-card>
+
+
+
+
+
+
+
+      <mat-card class="example-card" style="width: fit-content;" id="show" *ngIf="showMember">
+
+        <mat-card-header>
+            <mat-card-subtitle>Add Member</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <br>
+            <mat-form-field >
+                <label for="title">Member Email</label>
+                <input matInput name="title" id="title"  required [(ngModel)]="memberMail" >
+                <mat-error >Title is required</mat-error>
+              </mat-form-field>
+            <br>
+            <mat-card-actions>
+                <button mat-button color="warn"  (click)="addMember()">Add</button>
+            </mat-card-actions>
+        </mat-card-content>
+        </mat-card>
+
+
+
+</mat-sidenav-container>
+
+<link rel="stylesheet"
+  href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<link rel="stylesheet"
+  href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7"></script>
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>

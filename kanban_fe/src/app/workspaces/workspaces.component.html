@@ -1,0 +1,137 @@
+<div style="margin-left: 75px ;margin-top:40px ;margin-right: 75px;">
+    <hr>
+<span style="display: flex; justify-content: space-between;"><h1>Yours Workspace</h1>
+    <h1><mat-icon  (click)="change()">add_circle_outline</mat-icon></h1>
+</span>
+<mat-card class="example-card" id="show" *ngIf="show">
+
+    <mat-card-header>
+        <mat-card-subtitle>Add your WorkSapce</mat-card-subtitle>
+    </mat-card-header> 
+
+    <mat-card-content>
+        <mat-label>BackGround</mat-label>
+        <!-- <div class="cards1">
+            <mat-radio-button value="1" ><img src="../../assets/images/iceland-3908498_960_720 (1).jpg" alt="" ></mat-radio-button>
+              <mat-radio-button value="2" ><img src="../../assets/images//c488159a56cdbf66237dba5aaf504980.jpeg" alt="" ></mat-radio-button>
+                 <mat-radio-button value="3"><img src="../../assets/images/nature.jpg" alt="" ></mat-radio-button>
+                   <mat-radio-button value="4"><img src="../../assets/images/dragon-ball-dragon-ball-super-ultra-instinct-son-goku-wallpaper-preview.jpg" alt="" ></mat-radio-button>
+                    <mat-radio-button value="5"><img src="../../assets/images/Bicycle.jpg" alt="" ></mat-radio-button>
+                       <mat-radio-button value="6"><img src="../../assets/images/Weightlifting-Gym-Zoom-Background.webp" alt="" ></mat-radio-button>
+        </div> -->
+        <br>
+        <mat-form-field >
+            <label for="title">Space Title</label>
+            <input matInput name="title" id="title"  required [(ngModel)]="addSp.spaceName" >
+            <mat-error >Title is required</mat-error>
+          </mat-form-field>
+        <br>
+        <mat-card-actions>
+            <button mat-button color="warn"  (click)="addSpace(addSp)">Save</button>
+        </mat-card-actions>
+    </mat-card-content>
+    </mat-card>
+
+
+
+
+
+
+
+    <mat-card class="example-card" id="show" *ngIf="showUpdate">
+
+        <mat-card-header>
+            <mat-card-subtitle>Update WorkSapce</mat-card-subtitle>
+        </mat-card-header> 
+    
+        <mat-card-content>
+            <br>
+            <mat-form-field >
+                <label for="title">Space Title</label>
+                <input matInput name="title" id="title"  required [(ngModel)]="updatedValue.spaceName" >
+                <mat-error >Title is required</mat-error>
+              </mat-form-field>
+            <br>
+            <mat-card-actions>
+                <button mat-button color="warn"  (click)="updateSpace(updatedValue)">Update</button>
+            </mat-card-actions>
+        </mat-card-content>
+        </mat-card>
+
+
+
+
+
+
+<hr>
+    <div >
+        <div class="row  d-flex justify-content-center">
+            <div class=" ">
+               
+                 
+                        <div  class=" row gy-5 me-3" style="display: inline-flex;" *ngFor="let s of spaces" >
+                        
+                            <div class=" mb-3" style="width: 350px; margin: 24px;">
+                               
+                                
+                             
+                                  <div >
+                                    <div class="container1">
+                                        <img class="card-img-top img-fluid" src="https://media.istockphoto.com/id/1284739319/photo/woman-stretching-while-working-from-a-home-office.jpg?b=1&s=170667a&w=0&k=20&c=9ggNzbyU_amdrpnPabcjA_AZARx-6PITk6nqfgCpfQs=" alt="Card image cap">
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" class="top-right">
+                                            <mat-icon>more_vert</mat-icon>
+                                          </button>
+                                      </div> 
+
+                                      <mat-menu #menu="matMenu" class="menu" >
+                                        <button mat-menu-item (click)="updateShow(s)">
+                                            <mat-icon style="font-size: 19px;">edit</mat-icon><span
+                                              style="font-size: 14px; margin-left: -12px;">Update</span>
+                                          </button>
+                                        <button mat-menu-item (click)="delSpace(s.spaceID)">
+                                            <mat-icon style="font-size: 20px;">delete_forever</mat-icon><span
+                                              style="font-size: 14px;  margin-left: -12px;">Delete Task</span>
+                                          </button>
+                                    </mat-menu>
+
+                                     <div class="card-block" style="margin-top: -12px;">
+                                        <h4 class="card-title">{{s.spaceName}}</h4>
+                                        <p class="card-text">For what reason would it be advisable for me to think about business content.</p>
+                                        <a (click)="user(s.spaceID)" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                          
+                            </div>
+                        </div>
+                  
+                        </div>
+                    </div>
+                </div> 
+            
+      
+ 
+
+<hr>
+<h2>Guest Workspace</h2>
+<hr>
+<div >
+    <div class="row  d-flex justify-content-center">
+        <div class="col-sm-12  ">
+           
+            <div  class=" row gy-5 me-3" style="display: inline-flex;" *ngFor="let s of guestspaces" >
+                        
+                <div class=" mb-3" style="width: 350px; margin: 24px;">
+                    <div> <img class="card-img-top img-fluid" src="https://assets1.cbsnewsstatic.com/hub/i/r/2021/08/17/ca9161d8-8b03-48f4-a3e0-3fe55c73dad0/thumbnail/1200x630/1a6177d953ede09cafe845b8e48dcec3/ergo_main-1.jpg" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title">{{s.spaceName}}</h4>
+                            <p class="card-text">For what reason would it be advisable for me to think about business content.</p>
+                            <a (click)="userX(s.spaceID)" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <hr>

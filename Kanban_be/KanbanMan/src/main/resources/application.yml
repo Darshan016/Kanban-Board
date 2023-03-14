@@ -1,0 +1,26 @@
+server:
+  port: 8082
+spring:
+
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/kanban_Db}
+  application:
+    name: kanban-service
+  servlet:
+    multipart:
+      max-file-size:10mb
+      max-request-size:10mb
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_IP:localhost}:${EUREKA_SERVER_PORT:8761}/eureka
+    fetchRegistry: true
+    registerWithEureka: true
+
+#  spring.main.allow-circular-references=true
+#  spring.servlet.multipart.max-file-size=10mb
+#  spring.servlet.multipart.max-request-size=10mb
+#
+#  project.image=images/

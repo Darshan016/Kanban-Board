@@ -1,0 +1,17 @@
+server:
+  port: ${API_GATEWAY_PORT:9000}
+spring:
+  application:
+    name: spring-cloud-api-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+    compatibility-verifier:
+      enabled: false
